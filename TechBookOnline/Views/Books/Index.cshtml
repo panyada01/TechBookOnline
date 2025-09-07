@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TechBookOnline.Models.Book>
+
+@{
+    ViewData["Title"] = "รายการหนังสือ";
+}
+
+<h2 class="mb-4"><i class="bi bi-journal-bookmark"></i> รายการหนังสือ</h2>
+
+<div class="row g-4">
+    @foreach (var book in Model)
+    {
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm border border-1 border-dark">
+                <img src="@book.ImageUrl"
+                     class="card-img-top"
+                     alt="@book.Title"
+                     style="height:230px; object-fit:cover;" />
+
+                <div class="card-body d-flex flex-column">
+                    <h6 class="card-title text-truncate" title="@book.Title">@book.Title</h6>
+                    <p class="card-text text-muted small mb-2">👤 @book.Authors</p>
+
+                    <div class="mt-auto d-flex justify-content-between">
+                        <a asp-controller="Books"
+                           asp-action="Details"
+                           asp-route-id="@book.BookId"
+                           class="btn btn-sm btn-primary">
+                            รายละเอียด
+                        </a>
+
+                        <a asp-controller="UserLikes"
+                           asp-action="Add"
+                           asp-route-bookId="@book.BookId"
+                           class="btn btn-sm btn-outline-danger">
+                            ❤️ ถูกใจ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

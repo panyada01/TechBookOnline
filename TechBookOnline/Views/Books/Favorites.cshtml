@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<TechBookOnline.Models.Book>
+
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<div class="container mt-4">
+    <h2>⭐ My Favorite Books</h2>
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title" />
+                    <div class="card-body">
+                        <h6>@book.Title</h6>
+                        <p class="text-danger">@book.Price</p>
+                        <a asp-action="Details" asp-route-id="@book.ISBN13" class="btn btn-primary btn-sm">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

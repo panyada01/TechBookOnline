@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<TechBookOnline.Models.UserLike>
+
+<h2>📚 หนังสือที่คุณถูกใจ</h2>
+
+@if (!Model.Any())
+{
+    <p>คุณยังไม่ได้กดถูกใจหนังสือเล่มไหนเลย ❤️</p>
+}
+else
+{
+    <ul>
+        @foreach (var like in Model)
+        {
+            <li>
+                <img src="@like.Book.ImageUrl" alt="@like.Book.Title" width="50" />
+                <strong>@like.Book.Title</strong> - @like.Book.Authors
+                <small>(กดถูกใจเมื่อ: @like.LikedAt.ToString("dd/MM/yyyy HH:mm"))</small>
+            </li>
+        }
+    </ul>
+}
+
+

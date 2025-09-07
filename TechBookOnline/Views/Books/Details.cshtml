@@ -1,0 +1,13 @@
+﻿@model TechBookOnline.Models.Book
+
+<h2>@Model.Title</h2>
+<h4>@Model.Subtitle</h4>
+
+<img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" />
+
+<p><b>Authors:</b> @Model.Authors</p>
+<p><b>Publisher:</b> @Model.Publisher</p>
+<p><b>ISBN13:</b> @Model.ISBN13</p>
+<p><b>Price:</b> @Model.Price</p>
+
+<p><a href="@Model.Url" target="_blank">More Info</a></p>

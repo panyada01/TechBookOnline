@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="light"> <!-- 👈 ตั้งค่าเริ่มต้นเป็น Light -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TechBookOnline</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TechBookOnline.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container"> 
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a class="navbar-brand" asp-area="" asp-controller="Books" asp-action="Index">
+                    <img src="~/images/LoGoIconTBO-Photoroom.png" width="120" height="55" class="d-inline-block align-text-top">
+                </a>
+            </div>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                    <a asp-controller="Books" asp-action="Index" class="nav-link px-2 link-primary">
+                        หน้าหลัก
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="UserLikes" asp-action="Index" class="nav-link">
+                        รายการโปรด
+                    </a>
+                </li>
+
+            </ul> 
+            <div class="col-md-3 text-end">
+                @if (Context.Session.GetString("FullName") != null)
+                {
+                    var fullname = Context.Session.GetString("FullName");
+                    var userId = Context.Session.GetInt32("UserId");
+
+                    if (userId.HasValue)
+                    {
+                        <a class="me-2 text-decoration-none" href="/Users/Profile/@userId">
+                            Hello, @fullname
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="me-2" href="/Users/Profile/@Context.Session.GetInt32("UserId")">
+                            Hello, @Context.Session.GetString("FullName")
+                        </a>
+                    }
+
+                    <a class="btn btn-outline-danger" href="/Auth/Logout">Logout</a>
+                }
+                else
+                {
+                    <a class="btn btn-outline-primary me-2" href="/Auth/Login">Login</a>
+                    <a class="btn btn-primary" href="/Auth/Register">Sign-up</a>
+                }
+            </div>
+
+
+
+        </header> 
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2568 - TechBookOnline - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- ✅ Script Toggle -->
+    <script>
+        const toggleButton = document.getElementById("themeToggle");
+        const htmlTag = document.documentElement;
+        const savedTheme = localStorage.getItem("theme") || "light";
+
+        // โหลดค่าธีมจาก localStorage
+        htmlTag.setAttribute("data-bs-theme", savedTheme);
+        toggleButton.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+
+        toggleButton.addEventListener("click", () => {
+            const currentTheme = htmlTag.getAttribute("data-bs-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            htmlTag.setAttribute("data-bs-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+            toggleButton.textContent = newTheme === "dark" ? "☀️" : "🌙";
+        });
+    </script>
+</body>
+</html>

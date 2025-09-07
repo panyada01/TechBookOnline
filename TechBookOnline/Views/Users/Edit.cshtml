@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TechBookOnline.Models.User
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-warning text-white text-center">
+                    <h4>Edit Profile</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" asp-controller="Users" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="ID" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Fullname" class="form-label"></label>
+                            <input asp-for="Fullname" class="form-control" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Username" class="form-label"></label>
+                            <input asp-for="Username" class="form-control" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Upload Avatar</label><br />
+                            <input type="file" name="AvatarFile" class="form-control" />
+                            @if (!string.IsNullOrEmpty(Model.AvatarUrl))
+                            {
+                                <div class="mt-2 text-center">
+                                    <img src="@Model.AvatarUrl" width="120" height="120" class="rounded-circle" />
+                                </div>
+                            }
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a asp-action="Profile" asp-route-id="@Model.ID" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model TechBookOnline.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg text-center">
+                <div class="card-header bg-primary text-white">
+                    <h4>@Model.Fullname's Profile</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Avatar -->
+                    <img src="@(string.IsNullOrEmpty(Model.AvatarUrl)
+                                     ? Url.Content("~/images/default-avatar.png")
+                                     : Url.Content(Model.AvatarUrl))"
+                         class="rounded-circle mb-3"
+                         width="120" height="120"
+                         alt="User Avatar" />
+
+
+                    <!-- User Info -->
+                    <p><strong>Full Name:</strong> @Model.Fullname</p>
+                    <p><strong>Username:</strong> @Model.Username</p>
+                    <p><strong>Email:</strong> @Model.Email</p>
+
+                    <div class="text-center mt-4">
+                        <a href="/" class="btn btn-secondary">Back to Home</a>
+                        <a href="/Users/Edit/@Model.ID" class="btn btn-warning">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
